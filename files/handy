@@ -1,0 +1,16 @@
+#sudo certbot certonly --server https://acme-v02.api.letsencrypt.org/directory --preferred-challenges dns --domain nexus-infra.fxe.systems
+# sudo /bin/rm -rf /etc/letsencrypt/*
+
+#domain=web02.ldn.dorsai.co.uk.
+#key=dorsai
+#mailto=tim@dorsai.co.uk
+#stub_domain=web02.ldn.dorsai.co.uk
+
+domain=nexus-infra.fxe.systems.
+key=nexus
+mailto=tim.short@fundingxchange.co.uk
+stub_domain=nexus-infra.fxe.systems
+
+sudo certbot certonly --no-eff-email --email $mailto --server https://acme-v02.api.letsencrypt.org/directory --preferred-challenges dns --agree-tos --domain $domain
+
+sudo openssl x509 -in /etc/letsencrypt/archive/$stub_domain/cert1.pem -text -noout | grep -B1 $key

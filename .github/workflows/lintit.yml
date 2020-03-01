@@ -1,0 +1,11 @@
+name: linter
+on: [push]
+jobs:
+  build:
+    name: build-name
+    runs-on: ubuntu-18.04
+    steps:
+    - name: checkout
+      uses: actions/checkout@master
+    - name: run yammlint
+      uses: actionhubs/yamllint@master

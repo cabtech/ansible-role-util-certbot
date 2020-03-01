@@ -1,6 +1,9 @@
 ----
 # ansible-role-util-certbot
 
+## GitHub Actions: Build Status
+https://github.com/cabtech/ansible-role-util-certbot/workflows/linter/badge.svg
+
 ## Purpose
 Installs certbot from [Let's Encrypt](https://letsencrypt.org/)
 

@@ -2,10 +2,13 @@ name: linter
 on: [push]
 jobs:
   build:
-    name: build-name
+    name: FirstAction
     runs-on: ubuntu-18.04
     steps:
     - name: checkout
       uses: actions/checkout@master
     - name: run yammlint
       uses: nosborn/github-action-yamllint@v1
+      with:
+        config_file: .
+        file_or_dir: dir

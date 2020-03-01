@@ -30,4 +30,28 @@
     update_cache: false
   become: true
   tags: ct-certbot
+
+- name: 'install management script'
+  copy:
+    dest: /usr/local/bin/manage-letsencrypt.sh
+    group: root
+    mode: '0775'
+    owner: root
+    src: manage-letsencrypt.sh
+  become: true
+  tags: ct-certbot
+
+- name: 'cron job for renewing certificates'
+  cron:
+    disabled: false
+    hour: '2'
+    job: '/usr/bin/letsencrypt renew'
+    minute: '25'
+    name: 'certbot_certificate_renewal'
+    state: present
+    user: root
+    weekday: '0,6'  # Saturday and Sunday
+  become: true
+  when: certbot_renew_using_cron
+  tags: ct-certbot
 ...

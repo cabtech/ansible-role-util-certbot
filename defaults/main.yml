@@ -1,0 +1,3 @@
+---
+certbot_renew_using_cron: false
+...

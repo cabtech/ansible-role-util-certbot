@@ -1,11 +1,13 @@
+---
 name: linter
 on: [push]
 jobs:
   build:
-    name: FirstAction
+    name: yamllint
     runs-on: ubuntu-18.04
     steps:
     - name: checkout
       uses: actions/checkout@master
     - name: run yammlint
       uses: karancode/yamllint-github-action@master
+...

@@ -8,4 +8,4 @@ jobs:
     - name: checkout
       uses: actions/checkout@master
     - name: run yammlint
-      uses: actionhubs/yamllint@master
+      uses: actionhubs/yamllint@v1.0.0

@@ -1,32 +1,32 @@
 ---
 # --------------------------------
 
-- name: 'dependencies and refresh'
-  apt:
+- name: 'Install dependencies and refresh'
+  ansible.builtin.apt:
     name: software-properties-common
     state: present
     update_cache: true
   become: true
   tags: ct-certbot
 
-- name: 'add certbot ppa'
-  apt_repository:
+- name: 'Add certbot ppa'
+  ansible.builtin.apt_repository:
     repo: ppa:certbot/certbot
     state: present
   become: true
   register: reg_ppa
   tags: ct-certbot
 
-- name: 'install DNS plugin for AWS Route53'
-  apt:
+- name: 'Install DNS plugin for AWS Route53'
+  ansible.builtin.apt:
     name: python3-certbot-dns-route53
     state: present
-    update_cache: '{{reg_ppa is changed}}'
+    update_cache: '{{ reg_ppa is changed }}'
   become: true
   tags: ct-certbot
 
-- name: 'install certbot'
-  apt:
+- name: 'Install certbot'
+  ansible.builtin.apt:
     name: certbot
     state: present
     update_cache: false

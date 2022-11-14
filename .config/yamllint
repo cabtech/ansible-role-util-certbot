@@ -1,9 +1,6 @@
 ---
 extends: default
 
-ignore: |
-  .github/workflows/lintit.yml
-
 rules:
   line-length:
     level: warning

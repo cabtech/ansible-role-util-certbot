@@ -2,7 +2,7 @@
 # --------------------------------
 
 - name: "Include {{ ct_family }} tasks"
-  include_tasks: setup-{{ ct_family }}.yml
+  include_tasks: setup_{{ ct_family }}.yml
   when:
   - ct_family == "debian" or ct_family == "redhat"
   tags: ["ct-certbot"]

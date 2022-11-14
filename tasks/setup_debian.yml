@@ -1,0 +1,37 @@
+---
+# --------------------------------
+
+- name: 'dependencies and refresh'
+  apt:
+    name: software-properties-common
+    state: present
+    update_cache: true
+  become: true
+  tags: ct-certbot
+
+- name: 'add certbot ppa'
+  apt_repository:
+    repo: ppa:certbot/certbot
+    state: present
+  become: true
+  register: reg_ppa
+  tags: ct-certbot
+
+- name: 'install DNS plugin for AWS Route53'
+  apt:
+    name: python3-certbot-dns-route53
+    state: present
+    update_cache: '{{reg_ppa is changed}}'
+  become: true
+  tags: ct-certbot
+
+- name: 'install certbot'
+  apt:
+    name: certbot
+    state: present
+    update_cache: false
+  become: true
+  tags: ct-certbot
+
+# --------------------------------
+...

@@ -1,0 +1,48 @@
+---
+# --------------------------------
+
+- name: "Install snap"
+  ansible.builtin.package:
+    name: snapd
+    state: present
+  register: reg_snapd_install
+  tags: ["ct-cerbot"]
+
+- name: "Enable snapd"
+  ansible.builtin.systemd:
+    name: snapd.socket
+    enabled: true
+    state: started
+  tags: ["ct-cerbot"]
+
+- name: "Enable support for snap classic"
+  ansible.builtin.file:
+    dest: /snap
+    src: /var/lib/snapd/snap
+    state: link
+  when: ansible_os_family != "Debian"
+  tags: ["ct-cerbot"]
+
+- name: "Update snap after install"
+  ansible.builtin.shell: snap install core; snap refresh core
+  changed_when: true
+  failed_when: false
+  when: reg_snapd_install is changed
+  tags: ["ct-cerbot"]
+
+- name: "Install certbot"
+  ansible.builtin.snap:
+    name: certbot
+    classic: true
+  tags: ["ct-cerbot"]
+
+- name: "Add symlink to certbot"
+  ansible.builtin.file:
+    dest: /usr/bin/certbot
+    state: link
+    src: /snap/bin/certbot
+  ignore_errors: "{{ ansible_check_mode }}"
+  tags: ["ct-cerbot"]
+
+# --------------------------------
+...

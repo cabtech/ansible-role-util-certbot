@@ -7,26 +7,31 @@
   - ct_family == "debian" or ct_family == "redhat"
   tags: ["ct-certbot"]
 
-- name: 'Install management script'
+- import_tasks: install-using-snap.yml
+  when: certbot_install_method == "snap"
+  become: true
+  tags: ["ct-certbot"]
+
+- name: "Install management script"
   ansible.builtin.copy:
     dest: /usr/local/bin/manage-letsencrypt.sh
     group: root
-    mode: '0775'
+    mode: "0775"
     owner: root
     src: manage-letsencrypt.sh
   become: true
   tags: ["ct-certbot"]
 
-- name: 'Cron job for renewing certificates'
+- name: "Cron job for renewing certificates"
   ansible.builtin.cron:
     disabled: false
-    hour: '2'
-    job: '/usr/bin/letsencrypt renew'
-    minute: '25'
-    name: 'certbot_certificate_renewal'
+    hour: "2"
+    job: "/usr/bin/letsencrypt renew"
+    minute: "25"
+    name: "certbot_certificate_renewal"
     state: present
     user: root
-    weekday: '0,6'  # Saturday and Sunday
+    weekday: "0,6"  # Saturday and Sunday
   become: true
   when: certbot_renew_using_cron
   tags: ["ct-certbot"]

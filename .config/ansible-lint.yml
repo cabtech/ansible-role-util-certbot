@@ -1,6 +1,7 @@
 ---
 skip_list:
 - meta-no-info
+- no-handler
 - role-name
 - yaml[indentation]
 ...

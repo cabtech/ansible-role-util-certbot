@@ -26,12 +26,12 @@
   ansible.builtin.cron:
     disabled: false
     hour: "2"
-    job: "/usr/bin/letsencrypt renew"
+    job: "/usr/bin/certbot renew"
     minute: "25"
     name: "certbot_certificate_renewal"
     state: present
     user: root
-    weekday: "0,6"  # Saturday and Sunday
+    weekday: "6"  # Saturday
   become: true
   when: certbot_renew_using_cron
   tags: ["ct-certbot"]

@@ -30,8 +30,8 @@
   when: reg_snapd_install is changed
   tags: ["ct-cerbot"]
 
-- name: "Install certbot"
-  ansible.builtin.snap:
+- name: "Install Certbot"
+  community.general.packaging.os.snap:
     name: certbot
     classic: true
   tags: ["ct-cerbot"]

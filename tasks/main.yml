@@ -1,13 +1,16 @@
 ---
 # --------------------------------
 
-- name: "Include {{ ct_family }} tasks"
-  include_tasks: setup-{{ ct_family }}.yml
+- name: "Include OS-family specific tasks"
+  ansible.builtin.include_tasks:
+    file: setup-{{ ct_family }}.yml
   when:
   - ct_family == "debian" or ct_family == "redhat"
   tags: ["ct-certbot"]
 
-- import_tasks: install-using-snap.yml
+- name: "Use snap to install"
+  ansible.builtin.import_tasks:
+    file: install-using-snap.yml
   when: certbot_install_method == "snap"
   become: true
   tags: ["ct-certbot"]

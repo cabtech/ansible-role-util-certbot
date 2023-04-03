@@ -31,11 +31,11 @@ if [[ "$ss_action" == "create" ]]; then
 		echo "ERROR :: $prog :: need a domain (-d) if creating a certificate"
 		exit 43
 	else
-		/usr/bin/letsencrypt certonly --standalone --agree-tos -m "$ss_contact" -d "$ss_domain" ${ss_dry_run}
+		/usr/bin/certbot certonly --standalone --agree-tos -m "$ss_contact" -d "$ss_domain" ${ss_dry_run}
 		exit $?
 	fi
 elif [[ "$ss_action" == "renew" ]]; then
-	/usr/bin/letsencrypt renew ${ss_dry_run}
+	/usr/bin/certbot renew ${ss_dry_run}
 	exit $?
 else
 	echo "ERROR :: $prog :: unexpected action ($ss_action)"

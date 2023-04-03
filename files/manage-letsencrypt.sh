@@ -31,7 +31,7 @@ if [[ "$ss_action" == "create" ]]; then
 		echo "ERROR :: $prog :: need a domain (-d) if creating a certificate"
 		exit 43
 	else
-		/usr/bin/certbot certonly --standalone --agree-tos -m "$ss_contact" -d "$ss_domain" ${ss_dry_run}
+		/usr/bin/certbot certonly -n --standalone --agree-tos -m "$ss_contact" -d "$ss_domain" ${ss_dry_run}
 		exit $?
 	fi
 elif [[ "$ss_action" == "renew" ]]; then

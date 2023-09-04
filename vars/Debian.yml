@@ -1,3 +1,4 @@
 ---
-certbot_pkgs: ["snapd"]
+certbot_pkgs_core: ["snapd"]
+certbot_pkgs_pip: []
 ...

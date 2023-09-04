@@ -1,16 +1,33 @@
 ---
 # --------------------------------
 
-- name: "RedHat : Install EPEL"
-  ansible.builtin.dnf:
-    name: epel-release
+- name: "RedHat : Enable CRB (command,TODO)"
+  ansible.builtin.command:
+    cmd: subscription-manager repos --enable codeready-builder-for-rhel-8-{{ ansible_architecture }}-rpms
+  when: ansible_architecture == "aarch64"
+  changed_when: false  # TODO
+  become: true
+  tags: [ct-certbot, skip_ansible_lint]
+
+- name: "RedHat : Enable EPEL (command,TODO)"
+  ansible.builtin.command:
+    cmd: yum -y install https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm
+  when: ansible_architecture == "aarch64"
+  changed_when: false  # TODO
+  become: true
+  tags: [ct-certbot, skip_ansible_lint]
+
+- name: "RedHat : Install Pip packages (IECM)"
+  ansible.builtin.pip:
+    name: "{{ certbot_pkgs_pip }}"
     state: present
+  ignore_errors: "{{ ansible_check_mode }}"
   become: true
   tags: [ct-certbot]
 
-- name: "RedHat : Install packages"
+- name: "RedHat : Install core packages"
   ansible.builtin.dnf:
-    name: "{{ cerbot_packages }}"
+    name: "{{ certbot_pkgs_core }}"
     state: present
   become: true
   tags: [ct-certbot]

@@ -12,7 +12,7 @@
 
 - name: "Debian : Install core packages"
   ansible.builtin.apt:
-    name: "{{ certbot_pkgs }}"
+    name: "{{ certbot_pkgs_core }}"
     state: present
   when: ansible_os_family == "Debian"
   become: true

@@ -1,0 +1,22 @@
+---
+# --------------------------------
+
+- name: "Debian : Install dependencies and refresh"
+  ansible.builtin.apt:
+    name: software-properties-common
+    state: present
+    update_cache: true
+  when: ansible_os_family == "Debian"
+  become: true
+  tags: [ct-certbot]
+
+- name: "Debian : Install core packages"
+  ansible.builtin.apt:
+    name: "{{ certbot_pkgs }}"
+    state: present
+  when: ansible_os_family == "Debian"
+  become: true
+  tags: [ct-certbot]
+
+# --------------------------------
+...

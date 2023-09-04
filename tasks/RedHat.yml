@@ -1,0 +1,19 @@
+---
+# --------------------------------
+
+- name: "RedHat : Install EPEL"
+  ansible.builtin.dnf:
+    name: epel-release
+    state: present
+  become: true
+  tags: [ct-certbot]
+
+- name: "RedHat : Install packages"
+  ansible.builtin.dnf:
+    name: "{{ cerbot_packages }}"
+    state: present
+  become: true
+  tags: [ct-certbot]
+
+# --------------------------------
+...

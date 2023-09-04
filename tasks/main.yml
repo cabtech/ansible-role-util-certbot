@@ -1,19 +1,29 @@
 ---
 # --------------------------------
 
-- name: "Include OS-family specific tasks"
+- name: "Include variables wrapper"
   ansible.builtin.include_tasks:
-    file: setup-{{ ct_family }}.yml
-  when:
-  - ct_family == "debian" or ct_family == "redhat"
-  tags: ["ct-certbot"]
+    file: variables.yml
+  tags: [ct-certbot]
+
+- name: "Disto/Family tasks (FF)"
+  ansible.builtin.include_tasks:
+    file: "{{ lookup('ansible.builtin.first_found', params) }}"
+  vars:
+    params:
+      files:
+      - "{{ ansible_distribution }}-{{ ansible_distribution_major_version }}.yml"
+      - "{{ ansible_distribution }}.yml"
+      - "{{ ansible_os_family }}.yml"
+      - "default.yml"
+  tags: [ct-certbot]
 
 - name: "Use snap to install"
   ansible.builtin.import_tasks:
     file: install-using-snap.yml
   when: certbot_install_method == "snap"
   become: true
-  tags: ["ct-certbot"]
+  tags: [ct-certbot]
 
 - name: "Install management script"
   ansible.builtin.copy:
@@ -23,7 +33,7 @@
     owner: root
     src: manage-letsencrypt.sh
   become: true
-  tags: ["ct-certbot"]
+  tags: [ct-certbot]
 
 - name: "Cron job for renewing certificates"
   ansible.builtin.cron:
@@ -37,7 +47,7 @@
     weekday: "6"  # Saturday
   become: true
   when: certbot_renew_using_cron
-  tags: ["ct-certbot"]
+  tags: [ct-certbot]
 
 # --------------------------------
 ...

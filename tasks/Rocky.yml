@@ -1,0 +1,36 @@
+---
+# --------------------------------
+
+- name: "Rocky : Enable EPEL (aarch64)"
+  ansible.builtin.dnf:
+    name: "{{ certbot_epel_url }}"
+    state: present
+  when:
+  - ansible_architecture == "aarch64"
+  - ansible_distribution == "Rocky"
+  - ansible_os_family == "RedHat"
+  become: true
+  tags: [ct-certbot]
+
+- name: "Rocky : Install Pip packages (IECM)"
+  ansible.builtin.pip:
+    name: "{{ certbot_pkgs_pip }}"
+    state: present
+  when:
+  - ansible_distribution == "Rocky"
+  - ansible_os_family == "RedHat"
+  become: true
+  tags: [ct-certbot]
+
+- name: "Rocky : Install core packages"
+  ansible.builtin.dnf:
+    name: "{{ certbot_pkgs_core }}"
+    state: present
+  when:
+  - ansible_distribution == "Rocky"
+  - ansible_os_family == "RedHat"
+  become: true
+  tags: [ct-certbot]
+
+# --------------------------------
+...

@@ -1,4 +1,5 @@
 ---
+certbot_domains: []
 certbot_install_method: snap
 certbot_renew_using_cron: false
 ...

@@ -35,6 +35,16 @@
   become: true
   tags: [ct-certbot]
 
+- name: "Render domains file"
+  ansible.builtin.template:
+    dest: /usr/local/etc/certbot-domains.txt
+    group: root
+    mode: "0644"
+    owner: root
+    src: certbot-domains.txt.j2
+  become: true
+  tags: [ct-certbot]
+
 - name: "Cron job for renewing certificates"
   ansible.builtin.cron:
     disabled: false

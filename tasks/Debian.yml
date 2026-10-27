@@ -6,7 +6,7 @@
     name: software-properties-common
     state: present
     update_cache: true
-  when: ansible_os_family == "Debian"
+  when: ansible_facts['os_family'] == "Debian"
   become: true
   tags: [ct-certbot]
 
@@ -14,7 +14,7 @@
   ansible.builtin.apt:
     name: "{{ certbot_pkgs_core }}"
     state: present
-  when: ansible_os_family == "Debian"
+  when: ansible_facts['os_family'] == "Debian"
   become: true
   tags: [ct-certbot]
 

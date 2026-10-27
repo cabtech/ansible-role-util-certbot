@@ -6,9 +6,9 @@
     name: "{{ certbot_epel_url }}"
     state: present
   when:
-  - ansible_architecture == "aarch64"
-  - ansible_distribution == "Rocky"
-  - ansible_os_family == "RedHat"
+  - ansible_facts['architecture'] == "aarch64"
+  - ansible_facts['distribution'] == "Rocky"
+  - ansible_facts['os_family'] == "RedHat"
   become: true
   tags: [ct-certbot]
 
@@ -17,8 +17,8 @@
     name: "{{ certbot_pkgs_pip }}"
     state: present
   when:
-  - ansible_distribution == "Rocky"
-  - ansible_os_family == "RedHat"
+  - ansible_facts['distribution'] == "Rocky"
+  - ansible_facts['os_family'] == "RedHat"
   become: true
   tags: [ct-certbot]
 
@@ -27,8 +27,8 @@
     name: "{{ certbot_pkgs_core }}"
     state: present
   when:
-  - ansible_distribution == "Rocky"
-  - ansible_os_family == "RedHat"
+  - ansible_facts['distribution'] == "Rocky"
+  - ansible_facts['os_family'] == "RedHat"
   become: true
   tags: [ct-certbot]
 

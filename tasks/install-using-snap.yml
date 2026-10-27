@@ -20,7 +20,7 @@
     dest: /snap
     src: /var/lib/snapd/snap
     state: link
-  when: ansible_os_family != "Debian"
+  when: ansible_facts['os_family'] != "Debian"
   tags: [ct-certbot]
 
 - name: "Update snap after install"

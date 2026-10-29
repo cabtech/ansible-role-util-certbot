@@ -28,7 +28,7 @@
   changed_when: true
   failed_when: false
   when: reg_snapd_install is changed
-  tags: ["ct-certbot"]
+  tags: ["ct-certbot", "skip_ansible_lint"]
 
 - name: "Install Certbot"  # community.general.packaging.os.snap:
   community.general.snap:

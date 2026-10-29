@@ -1,5 +1,0 @@
----
-certbot_epel_url: "https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm"
-certbot_pkgs_core: ["snapd"]
-certbot_pkgs_pip: []
-...

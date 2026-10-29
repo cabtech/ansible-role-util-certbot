@@ -9,7 +9,7 @@
   - ansible_facts['os_family'] == "RedHat"
   changed_when: false
   become: true
-  tags: [ct-certbot, skip_ansible_lint]
+  tags: ["ct-certbot", "skip_ansible_lint"]
 
 - name: "RedHat : Enable EPEL (aarch64)"
   ansible.builtin.dnf:
@@ -19,7 +19,7 @@
   - ansible_facts['architecture'] == "aarch64"
   - ansible_facts['os_family'] == "RedHat"
   become: true
-  tags: [ct-certbot]
+  tags: ["ct-certbot"]
 
 - name: "RedHat : Install Pip packages (IECM)"
   ansible.builtin.pip:
@@ -27,7 +27,7 @@
     state: present
   when: ansible_facts['os_family'] == "RedHat"
   become: true
-  tags: [ct-certbot]
+  tags: ["ct-certbot"]
 
 - name: "RedHat : Install core packages"
   ansible.builtin.dnf:
@@ -35,7 +35,7 @@
     state: present
   when: ansible_facts['os_family'] == "RedHat"
   become: true
-  tags: [ct-certbot]
+  tags: ["ct-certbot"]
 
 # --------------------------------
 ...

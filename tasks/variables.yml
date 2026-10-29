@@ -13,7 +13,7 @@
       - "default.yml"
       paths:
       - vars
-  tags: [ct-certbot]
+  tags: ["ct-certbot"]
 
 # --------------------------------
 ...

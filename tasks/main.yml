@@ -4,7 +4,7 @@
 - name: "Include variables wrapper"
   ansible.builtin.include_tasks:
     file: variables.yml
-  tags: [ct-certbot]
+  tags: ["ct-certbot"]
 
 - name: "Disto/Family tasks (FF)"
   ansible.builtin.include_tasks:
@@ -16,14 +16,14 @@
       - "{{ ansible_facts['distribution'] }}.yml"
       - "{{ ansible_facts['os_family'] }}.yml"
       - "default.yml"
-  tags: [ct-certbot]
+  tags: ["ct-certbot"]
 
 - name: "Use snap to install"
   ansible.builtin.import_tasks:
     file: install-using-snap.yml
   when: certbot_install_method == "snap"
   become: true
-  tags: [ct-certbot]
+  tags: ["ct-certbot"]
 
 - name: "Install management script"
   ansible.builtin.copy:
@@ -33,7 +33,7 @@
     owner: root
     src: manage-letsencrypt.sh
   become: true
-  tags: [ct-certbot]
+  tags: ["ct-certbot"]
 
 - name: "Render domains file"
   ansible.builtin.template:
@@ -43,7 +43,7 @@
     owner: root
     src: certbot-domains.txt.j2
   become: true
-  tags: [ct-certbot]
+  tags: ["ct-certbot"]
 
 - name: "Cron job for renewing certificates"
   ansible.builtin.cron:
@@ -57,7 +57,7 @@
     weekday: "6"  # Saturday
   become: true
   when: certbot_renew_using_cron
-  tags: [ct-certbot]
+  tags: ["ct-certbot"]
 
 # --------------------------------
 ...

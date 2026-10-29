@@ -1,3 +1,11 @@
 ---
 dependencies: []
+
+galaxy_info:
+  author: Tim Short
+  description: "Installs certbot from Let's Encrypt"
+  license: GPL v3
+  role_name: ansible_role_util_certbot
+  min_ansible_version: "2"
+  namespace: cabtech
 ...

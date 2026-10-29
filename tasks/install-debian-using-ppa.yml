@@ -7,7 +7,7 @@
     state: present
   become: true
   register: reg_ppa
-  tags: ct-certbot
+  tags: ["ct-certbot"]
 
 - name: "Install DNS plugin for AWS Route53"
   ansible.builtin.apt:
@@ -15,7 +15,7 @@
     state: present
     update_cache: "{{ reg_ppa is changed }}"
   become: true
-  tags: ct-certbot
+  tags: ["ct-certbot"]
 
 - name: "Install certbot"
   ansible.builtin.apt:
@@ -23,7 +23,7 @@
     state: present
     update_cache: false
   become: true
-  tags: ct-certbot
+  tags: ["ct-certbot"]
 
 # --------------------------------
 ...

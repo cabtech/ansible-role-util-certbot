@@ -10,7 +10,7 @@
   - ansible_facts['distribution'] == "Rocky"
   - ansible_facts['os_family'] == "RedHat"
   become: true
-  tags: [ct-certbot]
+  tags: ["ct-certbot"]
 
 - name: "Rocky : Install Pip packages (IECM)"
   ansible.builtin.pip:
@@ -20,7 +20,7 @@
   - ansible_facts['distribution'] == "Rocky"
   - ansible_facts['os_family'] == "RedHat"
   become: true
-  tags: [ct-certbot]
+  tags: ["ct-certbot"]
 
 - name: "Rocky : Install core packages"
   ansible.builtin.dnf:
@@ -30,7 +30,7 @@
   - ansible_facts['distribution'] == "Rocky"
   - ansible_facts['os_family'] == "RedHat"
   become: true
-  tags: [ct-certbot]
+  tags: ["ct-certbot"]
 
 # --------------------------------
 ...
